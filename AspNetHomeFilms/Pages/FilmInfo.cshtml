@@ -1,0 +1,13 @@
+﻿@page "{title}/{producer}/{style}/{shortDescription}/{seanses:int}"
+@model AspNetHomeFilms.Pages.FilmInfoModel
+@{
+}
+<div>
+    <h2>@RouteData.Values["title"]</h2>
+    <p>Author: @RouteData.Values["producer"]</p>
+    <p>Genre: @RouteData.Values["style"]</p>
+    <p>Publisher: @RouteData.Values["shortDescription"]</p>
+    <p>Release Year: @RouteData.Values["seanses"]</p>
+</div>
+
+<a asp-page="/Films" class="text-right">Go back</a>

@@ -1,0 +1,14 @@
+﻿@page
+@using AspNetHomeFilms.Model
+@model AspNetHomeFilms.Pages.FilmsModel
+@{
+}
+<div>
+    @foreach (Film film in Model.FilmOutputSave.GetFilms())
+    {
+        <a asp-page="/FilmInfo" asp-route-title="@film.Title" asp-route-producer="@film.Producer" asp-route-style="@film.Style" asp-route-shortDescription="@film.ShortDescription" asp-route-seanses="@film.Seanses">
+            @film.Title
+        </a>
+        <br />
+    }
+</div>
