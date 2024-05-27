@@ -13,6 +13,16 @@ namespace AspNetHomeFilms.Service
             _films = ReadFromJsonFile("films.json");
         }
 
+        public Film FindFilm(Film filmToFind)
+        {
+            return _films.FirstOrDefault(f =>
+                f.Title == filmToFind.Title &&
+                f.Producer == filmToFind.Producer &&
+                f.Style == filmToFind.Style &&
+                f.ShortDescription == filmToFind.ShortDescription &&
+                f.Seanses == filmToFind.Seanses);
+        }
+
         public List<Film> ReadFromJsonFile(string filePath)
         {
             try
@@ -46,9 +56,27 @@ namespace AspNetHomeFilms.Service
             File.WriteAllText(filePath, updatedJson);
 
         }
-        public void RemoveFilm(string filePath)
+        public void WriteToJsonFile(List<Film> films, string filePath)
         {
-            Console.WriteLine("LVA");
+            string updatedJson = JsonConvert.SerializeObject(films, Formatting.Indented);
+            File.WriteAllText(filePath, updatedJson);
+        }
+        public void DeleteFilmFromJSON(Film film)
+        {
+            _films.RemoveAll(f => f.Title == film.Title &&
+                                   f.Producer == film.Producer &&
+                                   f.Style == film.Style &&
+                                   f.ShortDescription == film.ShortDescription &&
+                                   f.Seanses == film.Seanses);
+
+            WriteToJsonFile(_films, "films.json");
+        }
+
+        public void UpdateFilm(Film film,Film filmToUpdate)
+        {
+            DeleteFilmFromJSON(film);
+
+            WriteToJsonFile(filmToUpdate, "films.json");
         }
 
         public List<Film> GetFilms() => _films;

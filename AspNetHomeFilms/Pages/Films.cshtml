@@ -3,6 +3,7 @@
 @model AspNetHomeFilms.Pages.FilmsModel
 @{
 }
+
 <div>
     @foreach (Film film in Model.FilmOutputSave.GetFilms())
     {
@@ -10,5 +11,153 @@
             @film.Title
         </a>
         <br />
+        
     }
+    <button class="share-btn">Add film</button>
+    <dialog class="film-add-dialog">
+        <form method="post">
+            <header>
+                <h2>Add film</h2>
+                <button class="close-btn secndary" type="button">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="24"
+                         height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                         stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M18 6l-12 12" />
+                        <path d="M6 6l12 12" />
+                    </svg>
+                </button>
+            </header>
+            <div class="film-add-dialog__content">
+                <label for="Title">Title</label>
+                <input type="text" id="title" name="Title" value="@Model.Film.Title" required/>
+
+                <label for="Producer">Producer</label>
+                <input type="text" id="producer" name="Producer" value="@Model.Film.Producer" required />
+
+                <label for="Style">Style</label>
+                <input type="text" id="style" name="Style" value="@Model.Film.Style" required />
+
+                <label for="ShortDescription">ShortDescription</label>
+                <input type="text" id="desc" name="ShortDescription" value="@Model.Film.ShortDescription" required />
+
+                <label for="Seanses">Seanses</label>
+                <input type="number" id="seanses" name="Seanses" value="@Model.Film.Seanses" required />
+
+                <button type="submit">Add</button>
+            </div>
+        </form>
+    </dialog>
 </div>
+<script>
+
+    const modalDialog = document.querySelector(".film-add-dialog");
+    const shareBtn = document.querySelector(".share-btn");
+    const closeBtn = document.querySelector(".close-btn");
+
+    
+
+
+    shareBtn.addEventListener("click", () => {
+        modalDialog.classList.remove("film-add-dialog--fadeout");
+        modalDialog.showModal();
+    });
+
+    closeBtn.addEventListener("click", () => {
+        modalDialog.classList.add("film-add-dialog--fadeout");
+
+        modalDialog.close();
+    });
+
+
+</script>
+
+<style>
+    body {
+    font-family: 'Mulish', sans-serif;
+    background: var(--background);
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 1rem;
+}
+
+    .share-btn {
+        border-radius: 50%;
+        appearance: none;
+        padding: 1rem;
+        color: var(--primary);
+        outline: none;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: rgba(149, 157, 165, 0.2) 
+            0px 3px 6px;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        background: var(--white);
+        border: none;
+    }
+
+    .share-btn:hover {
+        box-shadow: rgba(149, 157, 165, 0.2) 
+            0px 6px 12px;
+    }
+
+    .share-btn svg {
+        stroke: var(--primary);
+    }
+
+    .close-btn {
+        background: inherit;
+        cursor: pointer;
+        border: none;
+    }
+
+    .close-btn svg {
+        height: 1.75rem;
+        width: 1.75rem;
+    }
+
+    .film-add-dialog {
+        border-radius: 0.75rem;
+        box-shadow: rgba(149, 157, 165, 0.2) 
+            0px 8px 24px;
+        max-width: 36rem;
+        margin: 0 auto;
+        width: 100%;
+        margin-top: 4rem;
+        border: none;
+    }
+
+    .film-add-dialog header {
+        display: flex;
+        min-height: 4rem;
+        padding: 1.5rem 2rem 0.75rem 2rem;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid 
+            var(--gray-light);
+    }
+
+    .film-add-dialog header h2 {
+        font-size: 1.5rem;
+        color: var(--headline);
+    }
+
+    .film-add-dialog__content {
+        padding: 2rem;
+            display: flex;
+            flex-direction: column;
+    }
+
+    .film-add-dialog h2 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        color: var(--text);
+    }
+    .film-add-dialog input{
+        margin-bottom: 15px;
+    }
+</style>

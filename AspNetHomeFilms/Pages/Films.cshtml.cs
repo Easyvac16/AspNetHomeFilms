@@ -12,6 +12,9 @@ namespace AspNetHomeFilms.Pages
 
         public IFilmOutputSaveService FilmOutputSave;
 
+        [BindProperty]
+        public Film Film { get; set; } = new Film();
+
         public override void OnPageHandlerSelected(PageHandlerSelectedContext context)
         {
             FilmOutputSave = new FilmOutputSaveService();
@@ -23,6 +26,17 @@ namespace AspNetHomeFilms.Pages
                 FilmOutputSave.AddFilm(new Film("Bonney Betty Belle", "Close the Door on the Way Out", "Comedy", "Practicality", 2008));
                 FilmOutputSave.AddFilm(new Film("Prosketti Marcippio", "Swords Crossed", "Romance", "Practicality", 2005));
             }
+        }
+        [HttpPost]
+        public IActionResult OnPost()
+        {
+            if (!ModelState.IsValid) 
+            {
+                return Page();
+            }
+
+            FilmOutputSave.AddFilm(new Film(Film.Title, Film.Producer, Film.Style, Film.ShortDescription, Film.Seanses));
+            return RedirectToPage(); 
         }
         public void OnGet()
         {

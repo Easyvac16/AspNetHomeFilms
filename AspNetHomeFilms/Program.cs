@@ -6,7 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 
-builder.Services.AddScoped<IFilmOutputSaveService, FilmOutputSaveService>();
+builder.Services.AddTransient<IFilmOutputSaveService, FilmOutputSaveService>();
 
 var app = builder.Build();
 

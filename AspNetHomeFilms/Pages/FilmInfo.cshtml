@@ -3,11 +3,46 @@
 @{
 }
 <div>
-    <h2>@RouteData.Values["title"]</h2>
-    <p>Author: @RouteData.Values["producer"]</p>
-    <p>Genre: @RouteData.Values["style"]</p>
-    <p>Publisher: @RouteData.Values["shortDescription"]</p>
-    <p>Release Year: @RouteData.Values["seanses"]</p>
+    <h2>@Model.Film.Title</h2>
+    <p>Author: @Model.Film.Producer</p>
+    <p>Genre: @Model.Film.Style</p>
+    <p>Publisher: @Model.Film.ShortDescription</p>
+    <p>Seanses: @Model.Film.Seanses</p>
+</div>
+
+<form method="post" asp-page-handler="Delete">
+    <button type="submit" class="btn btn-danger" onclick="return confirm('Ви впевнені, що хочете видалити цей фільм?');">Delete Film</button>
+</form>
+
+<button id="btnEdit" onclick="ShowForm()">Edit</button>
+<div id="editForm" style="display: none">
+    <form method="post">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="FilmToUpdate.Title" value="@Model.Film.Title" />
+
+        <label for="producer">Producer</label>
+        <input type="text" id="producer" name="FilmToUpdate.Producer" value="@Model.Film.Producer" />
+
+        <label for="style">Style</label>
+        <input type="text" id="style" name="FilmToUpdate.Style" value="@Model.Film.Style" />
+
+        <label for="shortDescription">Short Description</label>
+        <input type="text" id="shortDescription" name="FilmToUpdate.ShortDescription" value="@Model.Film.ShortDescription" />
+
+        <label for="seanses">Seanses</label>
+        <input type="number" id="seanses" name="FilmToUpdate.Seanses" value="@Model.Film.Seanses" />
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
 </div>
 
 <a asp-page="/Films" class="text-right">Go back</a>
+
+<script>
+    const btnEdit = document.getElementById("btnEdit");
+    const formEdit = document.getElementById("editForm");
+
+    function ShowForm() {
+        formEdit.style.display = "block";
+    }
+</script>

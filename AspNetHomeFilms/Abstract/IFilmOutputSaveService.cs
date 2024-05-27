@@ -6,8 +6,12 @@ namespace AspNetHomeFilms.Abstract
     {
         public List<Film> ReadFromJsonFile(string filePath);
         public void WriteToJsonFile(Film film, string filePath);
-        public void RemoveFilm(string filePath);
+        public void WriteToJsonFile(List<Film> films, string filePath);
         public List<Film> GetFilms();
         public void AddFilm(Film film);
+        public void DeleteFilmFromJSON(Film film);
+
+        public Film FindFilm(Film filmToFind);
+        public void UpdateFilm(Film film,Film FilmToUpdate);
     }
 }
